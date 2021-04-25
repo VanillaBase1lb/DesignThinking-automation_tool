@@ -3,14 +3,13 @@
 #include <conio.h>
 #include <sys/time.h>
 
-struct timeval t[500];
-int delay[500];
+struct timeval t[1000];
+int delay[1000];
+int noOfRuns;
+int noOfSaves;
 
 void Retracer(POINT* mousePos, int noOfSaves)
 {
-	std::cout << "DO NOT MOVE/CLICK THE MOUSE NOW!\nStarting after 2 seconds...\n" << std::endl;
-	Sleep(2000);
-
 	for (int i = 0; i < noOfSaves; i++)
 	{
 		delay[i] = t[i + 1].tv_sec * 1000 + t[i + 1].tv_usec / 1000 - t[i].tv_sec * 1000 - t[i].tv_usec / 1000;
@@ -47,7 +46,11 @@ int Saver(POINT* mousePos)
 				noOfSaves++;
 			}
 			if (kbKey == 'q')
+			{
 				quit = false;
+				gettimeofday(&t[i], NULL);
+				i++;
+			}
 		}
 	}
 	t[i] = t[i - 1];
@@ -57,28 +60,20 @@ int Saver(POINT* mousePos)
 
 int main(int argc, char* argv[])
 {	
-	char repeat;
 
-	while (true)
+	std::cout << "Enter the number of cycles to execute \n";
+	std::cin >> noOfRuns;
+	
+	POINT mousePos[1000];
+	int noOfSaves = Saver(mousePos);
+	
+	std::cout << "DO NOT MOVE/CLICK THE MOUSE NOW!\nStarting after 2 seconds...\n" << std::endl;
+	Sleep(2000);
+	
+	for (int i = 0; i < noOfRuns; i++)
 	{
-		POINT mousePos[500];
-
-		Retracer(mousePos, Saver(mousePos));
-
-		std::cout << "\n\nDo this again? (y/n)\n";
-		std::cin >> repeat;
-
-		switch (repeat)
-		{
-		case 'y':
-			system("cls");
-			break;
-		case 'Y':
-			system("cls");
-			break;
-		default:
-			return 0;
-		}
+		Retracer(mousePos, noOfSaves);
+		std::cout << i + 1 << "th cycle completed\n\n";
 	}
 
 
