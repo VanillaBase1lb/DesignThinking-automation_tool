@@ -3,6 +3,8 @@ Open source mouse automation tool for Windows.
 
 
 Precompiled binaries can be found insidde `binaries` folder.
+Download `autoclicker.exe` and `mouse_retracer.exe` directly.
+Chrome might refuse to download `.exe` files and antivirus software may try to block it from executing.
 Recommended to compile from scratch.
 
 # To compile from source
@@ -22,3 +24,4 @@ Download the repository manually or using git clone:
 Sorry, this project uses header files and syscalls exclusive to Windows. Try running under WINE or contribute to the project.
 
 # Please open an issue if there is an error or the instructions are not clear enough
+Sometimes it may not able to grab windows with admin privilages, in such case run as administrator.
