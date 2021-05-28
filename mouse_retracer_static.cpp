@@ -70,7 +70,6 @@ int Saver(POINT* mousePos)
 
 int main(int argc, char* argv[])
 {	
-
 	std::cout << "Enter the number of cycles to execute \n";
 	std::cin >> noOfRuns;
     
@@ -79,16 +78,20 @@ int main(int argc, char* argv[])
 	
 	POINT mousePos[1000];
 	int noOfSaves = Saver(mousePos);
-	
-	std::cout << "DO NOT MOVE/CLICK THE MOUSE NOW!\nStarting after 2 seconds...\n" << std::endl;
-	Sleep(2000);
+	char ch;
+	while (1)
+	{
+	std::cout << "PRESS 'y' TO START" << std::endl;
+	std::cin >> ch;
+	std::cout << "DO NOT MOVE/CLICK THE MOUSE NOW!\nStarting after 5 seconds...\n" << std::endl;
+	Sleep(5000);
 	
 	for (int i = 0; i < noOfRuns; i++)
 	{
 		Retracer(mousePos, noOfSaves);
 		std::cout << i + 1 << "th cycle completed\n\n";
 	}
-
+	}
 
 	return 0;
 }
