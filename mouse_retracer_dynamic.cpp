@@ -13,6 +13,11 @@ void Retracer(POINT* mousePos, int noOfSaves)
 {
 	for (int i = 0; i < noOfSaves; i++)
 	{
+        if(GetKeyState(VK_F8) & 0x8000) // check if F8 is pressed
+        {
+            exit(0);
+        }
+        
 		delay[i] = t[i + 1].tv_sec * 1000 + t[i + 1].tv_usec / 1000 - t[i].tv_sec * 1000 - t[i].tv_usec / 1000;
 		SetCursorPos(mousePos[i].x, mousePos[i].y);
 

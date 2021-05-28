@@ -13,7 +13,11 @@ void Retracer(POINT* mousePos, int noOfSaves)
 {
 	for (int i = 0; i < noOfSaves; i++)
 	{
-		SetCursorPos(mousePos[i].x, mousePos[i].y);
+        if(GetKeyState(VK_F8) & 0x8000) // check if F8 is pressed
+        {
+            exit(0);
+        }
+        SetCursorPos(mousePos[i].x, mousePos[i].y);
 
 		mouse_event(MOUSEEVENTF_LEFTDOWN, mousePos[i].x, mousePos[i].y, 0, 0);
 		mouse_event(MOUSEEVENTF_LEFTUP, mousePos[i].x, mousePos[i].y, 0, 0);
